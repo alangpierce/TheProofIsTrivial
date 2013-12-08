@@ -1,21 +1,20 @@
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
 <html>
 <body>
 <title>The proof is trivial!</title>
 <center>
-
 <script type="text/javascript">
 
 // Hosted on GitHub.
 // Project page: https://github.com/alangpierce/TheProofIsTrivial
 
-var start =
-    [
+var intros = [
     "Just biject it to a",
     "Just view the problem as a",
-    ];
+];
 
-var first =
-    [
+var adjectives = [
     "abelian",
     "associative",
     "computable",
@@ -52,98 +51,74 @@ var first =
     "closed",
     "compact",
     "clopen",
-    "pointless"
-    ];
+    "pointless",
+];
 
-var second =
-    [
-    ["multiset", "multisets", true],
-    ["integer", "integers", false],
-    ["metric space", "metric spaces", true],
-    ["group", "groups", true],
-    ["monoid", "monoids", true],
-    ["semigroup", "semigroups", true],
-    ["ring", "rings", true],
-    ["field", "fields", true],
-    ["module", "modules", true],
-    ["Turing machine", "Turing machines", false],
-    ["topological space", "topological spaces", true],
-    ["automorphism", "automorphisms", false],
-    ["bijection", "bijections", false],
-    ["DAG", "DAGs", false],
-    ["generating function", "generating functions", false],
-    ["taylor series", "taylor series", false],
-    ["Hilbert space", "Hilbert spaces", true],
-    ["linear transformation", "linear transformations", false],
-    ["manifold", "manifolds", true],
-    ["hypergraph", "hypergraphs", true],
-    ["pushdown automaton", "pushdown automata", false],
-    ["combinatorial game", "combinatorial games", false],
-    ["residue class", "residue classes", true],
-    ["equivalence relation", "equivalence relations", false],
-    ["logistic system", "logistic systems", true],
-    ["tournament", "tournaments", false],
-    ["random variable", "random variables", false],
-    ["complexity class", "complexity classes", true],
-    ["triangulation", "triangulations", false],
-    ["unbounded-fan-in circuit", "unbounded-fan-in circuits", false],
-    ["log-space reduction", "log-space reductions", false],
-    ["language", "languages", true],
-    ["poset", "posets", true],
-    ["algebra", "algebras", true],
-    ["Markov chain", "Markov chains", false],
-    ["4-form", "4-forms", false],
-    ["7-chain", "7-chains", false],
-    ]
+var setNouns = [
+    ["multiset", "multisets"],
+    ["metric space", "metric spaces"],
+    ["group", "groups"],
+    ["monoid", "monoids"],
+    ["semigroup", "semigroups"],
+    ["ring", "rings"],
+    ["field", "fields"],
+    ["module", "modules"],
+    ["topological space", "topological spaces"],
+    ["Hilbert space", "Hilbert spaces"],
+    ["manifold", "manifolds"],
+    ["hypergraph", "hypergraphs"],
+    ["DAG", "DAGs"],
+    ["residue class", "residue classes"],
+    ["logistic system", "logistic systems"],
+    ["complexity class", "complexity classes"],
+    ["language", "languages"],
+    ["poset", "posets"],
+    ["algebra", "algebras"],
+]
 
-function randomStart()
-{
-    var ind = Math.floor(Math.random() * start.length);
-    return start[ind];
+var allNouns = setNouns.concat([
+    // Mathematical objects that can't contain elements (unless you're a set
+    // theorist).
+    ["integer", "integers"],
+    ["Turing machine", "Turing machines"],
+    ["automorphism", "automorphisms"],
+    ["bijection", "bijections"],
+    ["generating function", "generating functions"],
+    ["taylor series", "taylor series"],
+    ["linear transformation", "linear transformations"],
+    ["pushdown automaton", "pushdown automata"],
+    ["combinatorial game", "combinatorial games"],
+    ["equivalence relation", "equivalence relations"],
+    ["tournament", "tournaments"],
+    ["random variable", "random variables"],
+    ["triangulation", "triangulations"],
+    ["unbounded-fan-in circuit", "unbounded-fan-in circuits"],
+    ["log-space reduction", "log-space reductions"],
+    ["Markov chain", "Markov chains"],
+    ["4-form", "4-forms"],
+    ["7-chain", "7-chains"],
+])
+
+function randomFromList(list) {
+    return list[Math.floor(Math.random() * list.length)];
 }
 
-function randomFirst()
-{
-    var ind = Math.floor(Math.random() * first.length);
-    return first[ind];
+function writeLine(fontSize, text) {
+    document.write('<p style="font-size:' + fontSize + '; margin:0; padding:0; border:0">' + text + '</p>');
 }
 
-function randomSecond(plural)
-{
-    var ind = Math.floor(Math.random() * second.length);
-    if (plural)
-        return second[ind][1];
-    else
-    {
-        while (!second[ind][2])
-            ind = Math.floor(Math.random() * second.length);
-        return second[ind][0];
-    }
-}
+var firstAdjective = randomFromList(adjectives)
+var introSuffix = "aeiou".indexOf(firstAdjective[0]) === -1 ? "" : "n";
 
-var firstInd = Math.floor(Math.random() * first.length);
-
-var addn = (first[firstInd][0] == "a" ||
-            first[firstInd][0] == "e" ||
-            first[firstInd][0] == "i" ||
-            first[firstInd][0] == "o" ||
-            first[firstInd][0] == "u");
-
-var paddingopts = "margin:0; padding:0; border:0;";
-
-document.write("<p style=\"font-size:40;" + paddingopts + "\">The proof is trivial! " +
-               randomStart() + (addn ? "n" : "") + "</p>");
-document.write("<p style=\"font-size:70;" + paddingopts + "\">" + first[firstInd] + "</p>");
-document.write("<p style=\"font-size:70;" + paddingopts + "\">" + randomSecond(false) + "</p>");
-
-document.write("<p style=\"font-size:40;" + paddingopts + "\">whose elements are</p>");
-document.write("<p style=\"font-size:70;" + paddingopts + "\">" + randomFirst() + "</p>");
-document.write("<p style=\"font-size:70;" + paddingopts + "\">" + randomSecond(true) + "</p>");
+writeLine(40, "The proof is trivial!" + randomFromList(intros) + introSuffix);
+writeLine(70, firstAdjective);
+writeLine(70, randomFromList(setNouns)[0]);
+writeLine(40, "whose elements are");
+writeLine(70, randomFromList(adjectives));
+writeLine(70, randomFromList(allNouns)[1]);
 
 </script>
-
 </center>
-
 </body>
 </html>
 
