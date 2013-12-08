@@ -133,7 +133,7 @@ function plural(nounWithOverride) {
 var firstAdjective = randomFromList(adjectives)
 var introSuffix = "aeiou".indexOf(firstAdjective[0]) === -1 ? "" : "n";
 
-writeLine(40, "The proof is trivial!" + randomFromList(intros) + introSuffix);
+writeLine(40, "The proof is trivial! " + randomFromList(intros) + introSuffix);
 writeLine(70, firstAdjective);
 writeLine(70, randomFromList(setNouns)[0]);
 writeLine(40, "whose elements are");
