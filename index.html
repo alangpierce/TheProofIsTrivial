@@ -6,8 +6,10 @@
 <center>
 <script type="text/javascript">
 
-// Hosted on GitHub.
-// Project page: https://github.com/alangpierce/TheProofIsTrivial
+/*
+ * Hosted on GitHub.
+ * Project page: https://github.com/alangpierce/TheProofIsTrivial
+ */
 
 var intros = [
     "Just biject it to a",
@@ -54,49 +56,56 @@ var adjectives = [
     "pointless",
 ];
 
+/*
+ * For each noun, the first string is the singular version, and the second
+ * string specifies the plural version if it can't be inferred from the simple
+ * algorithm in the plural() method.
+ */
 var setNouns = [
-    ["multiset", "multisets"],
-    ["metric space", "metric spaces"],
-    ["group", "groups"],
-    ["monoid", "monoids"],
-    ["semigroup", "semigroups"],
-    ["ring", "rings"],
-    ["field", "fields"],
-    ["module", "modules"],
-    ["topological space", "topological spaces"],
-    ["Hilbert space", "Hilbert spaces"],
-    ["manifold", "manifolds"],
-    ["hypergraph", "hypergraphs"],
-    ["DAG", "DAGs"],
-    ["residue class", "residue classes"],
-    ["logistic system", "logistic systems"],
-    ["complexity class", "complexity classes"],
-    ["language", "languages"],
-    ["poset", "posets"],
-    ["algebra", "algebras"],
+    ["multiset"],
+    ["metric space"],
+    ["group"],
+    ["monoid"],
+    ["semigroup"],
+    ["ring"],
+    ["field"],
+    ["module"],
+    ["topological space"],
+    ["Hilbert space"],
+    ["manifold"],
+    ["hypergraph"],
+    ["DAG"],
+    ["residue class"],
+    ["logistic system"],
+    ["complexity class"],
+    ["language"],
+    ["poset"],
+    ["algebra"],
 ]
 
 var allNouns = setNouns.concat([
-    // Mathematical objects that can't contain elements (unless you're a set
-    // theorist).
-    ["integer", "integers"],
-    ["Turing machine", "Turing machines"],
-    ["automorphism", "automorphisms"],
-    ["bijection", "bijections"],
-    ["generating function", "generating functions"],
+    /*
+     * Mathematical objects that can't contain elements (unless you're a set
+     * theorist).
+     */
+    ["integer"],
+    ["Turing machine"],
+    ["automorphism"],
+    ["bijection"],
+    ["generating function"],
     ["taylor series", "taylor series"],
-    ["linear transformation", "linear transformations"],
+    ["linear transformation"],
     ["pushdown automaton", "pushdown automata"],
-    ["combinatorial game", "combinatorial games"],
-    ["equivalence relation", "equivalence relations"],
-    ["tournament", "tournaments"],
-    ["random variable", "random variables"],
-    ["triangulation", "triangulations"],
-    ["unbounded-fan-in circuit", "unbounded-fan-in circuits"],
-    ["log-space reduction", "log-space reductions"],
-    ["Markov chain", "Markov chains"],
-    ["4-form", "4-forms"],
-    ["7-chain", "7-chains"],
+    ["combinatorial game"],
+    ["equivalence relation"],
+    ["tournament"],
+    ["random variable"],
+    ["triangulation"],
+    ["unbounded-fan-in circuit"],
+    ["log-space reduction"],
+    ["Markov chain"],
+    ["4-form"],
+    ["7-chain"],
 ])
 
 function randomFromList(list) {
@@ -104,7 +113,21 @@ function randomFromList(list) {
 }
 
 function writeLine(fontSize, text) {
-    document.write('<p style="font-size:' + fontSize + '; margin:0; padding:0; border:0">' + text + '</p>');
+    document.write('<p style="font-size:' + fontSize +
+            '; margin:0; padding:0; border:0">' + text + '</p>');
+}
+
+function plural(nounWithOverride) {
+    if (nounWithOverride.length === 2) {
+        return nounWithOverride[1];
+    } else {
+        var text = nounWithOverride[0];
+        if (text[text.length - 1] === "s") {
+            return text + "es";
+        } else {
+            return text + "s";
+        }
+    }
 }
 
 var firstAdjective = randomFromList(adjectives)
@@ -115,7 +138,7 @@ writeLine(70, firstAdjective);
 writeLine(70, randomFromList(setNouns)[0]);
 writeLine(40, "whose elements are");
 writeLine(70, randomFromList(adjectives));
-writeLine(70, randomFromList(allNouns)[1]);
+writeLine(70, plural(randomFromList(allNouns)));
 
 </script>
 </center>
