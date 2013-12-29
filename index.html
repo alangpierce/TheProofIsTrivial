@@ -1,10 +1,13 @@
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>The proof is trivial!</title>
+</head>
 <body>
-<title>The proof is trivial!</title>
-<center>
 <script type="text/javascript">
+//<![CDATA[
 
 /*
  * Hosted on GitHub.
@@ -114,7 +117,8 @@ function randomFromList(list) {
 
 function writeLine(fontSize, text) {
     document.write('<p style="font-size:' + fontSize +
-            '; margin:0; padding:0; border:0">' + text + '</p>');
+            '; text-align: center; margin:0; padding:0; border:0">' + text +
+            '</p>');
 }
 
 function plural(nounWithOverride) {
@@ -140,8 +144,8 @@ writeLine(40, "whose elements are");
 writeLine(70, randomFromList(adjectives));
 writeLine(70, plural(randomFromList(allNouns)));
 
+//]]>
 </script>
-</center>
 </body>
 </html>
 
