@@ -144,9 +144,12 @@ function randomFromList(list) {
 }
 
 function writeLine(fontSize, text) {
-    document.write('<p style="font-size:' + fontSize + "px" +
-            '; text-align: center; margin:0; padding:0; border:0">' + text +
-            '</p>');
+    var p = document.createElement("p");
+    p.style.fontSize = fontSize + "px";
+    p.style.margin = "0";
+    p.style.textAlign = "center";
+    p.textContent = text;
+    document.body.appendChild(p);
 }
 
 function plural(nounWithOverride) {
