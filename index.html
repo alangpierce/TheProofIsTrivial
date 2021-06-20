@@ -15,165 +15,174 @@
  */
 
 var intros = [
-    "Just biject it to a",
-    "Just view the problem as a",
+  "Just biject it to a",
+  "Just view the problem as a",
 ];
+
+/**
+ * Automatically fill in whether the word starts with a vowel sound (i.e.
+ * should be preceded by "an") if it's easy to infer. Otherwise, it must
+ * be specified explicitly.
+ **/
+function makeAdjective(word, {startsWithVowelSound} = {}) {
+  if (startsWithVowelSound == null) {
+    startsWithVowelSound = ("aeiou".indexOf(word[0]) !== -1);
+  }
+  return {word, startsWithVowelSound};
+}
 
 var adjectives = [
-    "abelian",
-    "associative",
-    "computable",
-    "Lebesgue-measurable",
-    "semi-decidable",
-    "simple",
-    "combinatorial",
-    "structure-preserving",
-    "diagonalizable",
-    "nonsingular",
-    "orientable",
-    "twice-differentiable",
-    "thrice-differentiable",
-    "countable",
-    "prime",
-    "complete",
-    "continuous",
-    "trivial",
-    "3-connected",
-    "bipartite",
-    "planar",
-    "finite",
-    "nondeterministic",
-    "alternating",
-    "convex",
-    "undecidable",
-    "dihedral",
-    "context-free",
-    "rational",
-    "regular",
-    "Noetherian",
-    "Cauchy",
-    "open",
-    "closed",
-    "compact",
-    "clopen",
-    "pointless",
-    "perfect",
-    "non-degenerate",
-    "degenerate",
-    "skew-symmetric",
-    "sesquilinear",
-    "fundamental",
-    "smooth",
-    "connected",
-    "simplicial",
-    "universal",
-    "greedy",
-    "normal",
-    "total",
-    "left invertible",
-    "exact",
-    "empty",
+  makeAdjective("abelian"),
+  makeAdjective("associative"),
+  makeAdjective("computable"),
+  makeAdjective("Lebesgue-measurable"),
+  makeAdjective("semi-decidable"),
+  makeAdjective("simple"),
+  makeAdjective("combinatorial"),
+  makeAdjective("structure-preserving"),
+  makeAdjective("diagonalizable"),
+  makeAdjective("nonsingular"),
+  makeAdjective("orientable"),
+  makeAdjective("twice-differentiable"),
+  makeAdjective("thrice-differentiable"),
+  makeAdjective("countable"),
+  makeAdjective("prime"),
+  makeAdjective("complete"),
+  makeAdjective("continuous"),
+  makeAdjective("trivial"),
+  makeAdjective("3-connected"),
+  makeAdjective("bipartite"),
+  makeAdjective("planar"),
+  makeAdjective("finite"),
+  makeAdjective("nondeterministic"),
+  makeAdjective("alternating"),
+  makeAdjective("convex"),
+  makeAdjective("undecidable"),
+  makeAdjective("dihedral"),
+  makeAdjective("context-free"),
+  makeAdjective("rational"),
+  makeAdjective("regular"),
+  makeAdjective("Noetherian"),
+  makeAdjective("Cauchy"),
+  makeAdjective("open"),
+  makeAdjective("closed"),
+  makeAdjective("compact"),
+  makeAdjective("clopen"),
+  makeAdjective("pointless"),
+  makeAdjective("perfect"),
+  makeAdjective("non-degenerate"),
+  makeAdjective("degenerate"),
+  makeAdjective("skew-symmetric"),
+  makeAdjective("sesquilinear"),
+  makeAdjective("fundamental"),
+  makeAdjective("smooth"),
+  makeAdjective("connected"),
+  makeAdjective("simplicial"),
+  makeAdjective("universal", {startsWithVowelSound: false}),
+  makeAdjective("greedy"),
+  makeAdjective("normal"),
+  makeAdjective("total"),
+  makeAdjective("left invertible"),
+  makeAdjective("exact"),
+  makeAdjective("empty"),
 ];
 
-/*
- * For each noun, the first string is the singular version, and the second
- * string specifies the plural version if it can't be inferred from the simple
- * algorithm in the plural() method.
- */
+/**
+ * Automatically fill in the plural form if it's easy to infer. Otherwise, it
+ * must be specified explicitly.
+ **/
+function makeNoun(word, {plural} = {}) {
+  if (plural == null) {
+    if (word[word.length - 1] === "s") {
+      plural = word + "es";
+    } else {
+      plural = word + "s";
+    }
+  }
+  return {singular: word, plural};
+}
+
 var setNouns = [
-    ["multiset"],
-    ["metric space"],
-    ["group"],
-    ["monoid"],
-    ["semigroup"],
-    ["ring"],
-    ["field"],
-    ["module"],
-    ["topological space"],
-    ["Hilbert space"],
-    ["manifold"],
-    ["hypergraph"],
-    ["DAG"],
-    ["residue class"],
-    ["logistic system"],
-    ["complexity class"],
-    ["language"],
-    ["poset"],
-    ["algebra"],
-    ["Lie algebra"],
-    ["Dynkin system"],
-    ["sigma-algebra"],
-    ["ultrafilter"],
-    ["Cayley graph"],
-    ["variety"],
-    ["orbit"],
+  makeNoun("multiset"),
+  makeNoun("metric space"),
+  makeNoun("group"),
+  makeNoun("monoid"),
+  makeNoun("semigroup"),
+  makeNoun("ring"),
+  makeNoun("field"),
+  makeNoun("module"),
+  makeNoun("topological space"),
+  makeNoun("Hilbert space"),
+  makeNoun("manifold"),
+  makeNoun("hypergraph"),
+  makeNoun("DAG"),
+  makeNoun("residue class"),
+  makeNoun("logistic system"),
+  makeNoun("complexity class"),
+  makeNoun("language"),
+  makeNoun("poset"),
+  makeNoun("algebra"),
+  makeNoun("Lie algebra"),
+  makeNoun("Dynkin system"),
+  makeNoun("sigma-algebra"),
+  makeNoun("ultrafilter"),
+  makeNoun("Cayley graph"),
+  makeNoun("variety", {plural: "varieties"}),
+  makeNoun("orbit"),
 ]
 
 var allNouns = setNouns.concat([
-    /*
-     * Mathematical objects that can't contain elements (unless you're a set
-     * theorist).
-     */
-    ["integer"],
-    ["Turing machine"],
-    ["automorphism"],
-    ["bijection"],
-    ["generating function"],
-    ["taylor series", "taylor series"],
-    ["linear transformation"],
-    ["pushdown automaton", "pushdown automata"],
-    ["combinatorial game"],
-    ["equivalence relation"],
-    ["tournament"],
-    ["random variable"],
-    ["triangulation"],
-    ["unbounded-fan-in circuit"],
-    ["log-space reduction"],
-    ["Markov chain"],
-    ["4-form"],
-    ["7-chain"],
-    ["operator"],
-    ["homeomorphism"],
-    ["color"],
-    ["Betti number"],
-    ["Radon-Nikodym derivative"],
+  /*
+   * Mathematical objects that can't contain elements (unless you're a set
+   * theorist).
+   */
+  makeNoun("integer"),
+  makeNoun("Turing machine"),
+  makeNoun("automorphism"),
+  makeNoun("bijection"),
+  makeNoun("generating function"),
+  makeNoun("taylor series", {plural: "taylor series"}),
+  makeNoun("linear transformation"),
+  makeNoun("pushdown automaton", {plural: "pushdown automata"}),
+  makeNoun("combinatorial game"),
+  makeNoun("equivalence relation"),
+  makeNoun("tournament"),
+  makeNoun("random variable"),
+  makeNoun("triangulation"),
+  makeNoun("unbounded-fan-in circuit"),
+  makeNoun("log-space reduction"),
+  makeNoun("Markov chain"),
+  makeNoun("4-form"),
+  makeNoun("7-chain"),
+  makeNoun("operator"),
+  makeNoun("homeomorphism"),
+  makeNoun("color"),
+  makeNoun("Betti number"),
+  makeNoun("Radon-Nikodym derivative"),
 ])
 
 function randomFromList(list) {
-    return list[Math.floor(Math.random() * list.length)];
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 function writeLine(fontSize, text) {
-    var p = document.createElement("p");
-    p.style.fontSize = fontSize + "px";
-    p.style.margin = "0";
-    p.style.textAlign = "center";
-    p.textContent = text;
-    document.body.appendChild(p);
+  var p = document.createElement("p");
+  p.style.fontSize = fontSize + "px";
+  p.style.margin = "0";
+  p.style.textAlign = "center";
+  p.textContent = text;
+  document.body.appendChild(p);
 }
 
-function plural(nounWithOverride) {
-    if (nounWithOverride.length === 2) {
-        return nounWithOverride[1];
-    } else {
-        var text = nounWithOverride[0];
-        if (text[text.length - 1] === "s") {
-            return text + "es";
-        } else {
-            return text + "s";
-        }
-    }
-}
-
-var firstAdjective = randomFromList(adjectives)
-var introSuffix = "aeiou".indexOf(firstAdjective[0]) === -1 ? "" : "n";
+var firstAdjective = randomFromList(adjectives);
+var introSuffix = firstAdjective.startsWithVowelSound ? "n" : "";
 
 writeLine(40, "The proof is trivial! " + randomFromList(intros) + introSuffix);
-writeLine(70, firstAdjective);
-writeLine(70, randomFromList(setNouns)[0]);
+writeLine(70, firstAdjective.word);
+writeLine(70, randomFromList(setNouns).singular);
 writeLine(40, "whose elements are");
-writeLine(70, randomFromList(adjectives));
-writeLine(70, plural(randomFromList(allNouns)));
+writeLine(70, randomFromList(adjectives).word);
+writeLine(70, randomFromList(allNouns).plural);
 
 
 // Google Analytics
